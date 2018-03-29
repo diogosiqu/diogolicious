@@ -6,8 +6,23 @@
 </template>
 
 <script>
+import { map } from 'lodash'
 export default {
-  name: 'TheContainer'
+  name: 'TheContainer',
+  data () {
+    return {
+      list: []
+    }
+  },
+  mounted () {
+    this.$db.ref('diogolicious-99d60').on('value', data => {
+      const obj = data.val()
+      this.list = map(obj, (site, index) => {
+        site.id = index
+        return site
+      })
+    })
+  }
 }
 </script>
 

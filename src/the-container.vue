@@ -2,7 +2,25 @@
   <div id="app">
     <!-- <img src="./assets/logo.png"> -->
     <div>
-      <button @click="saveBookmark()">Enviar</button>
+      <div class="form">
+        <div class="form-group">
+          <label for="">Bookmark Url</label>
+          <input type="text" class="form-control" id="" placeholder="Url" v-model="bookmark.bookmark_link">
+        </div>
+        <div class="form-group">
+          <label for="">Bookmark Title</label>
+          <input type="text" class="form-control" id="" placeholder="Title" v-model="bookmark.bookmark_title">
+        </div>
+        <div class="form-group">
+          <label for="">Bookmark Description</label>
+          <input type="text" class="form-control" id="" placeholder="Description" v-model="bookmark.description">
+        </div>
+        <div class="form-group">
+          <label for="">Tags</label>
+          <input type="text" class="form-control" id="" placeholder="Tags" v-model="bookmark.tag">
+        </div>
+        <button @click="saveBookmark()">Enviar</button>
+      </div>
       <li v-for="item in list" :key="item.key" class="list-itens">
         {{item.bookmark_title}} <br>
         <a :href="item.bookmark_link">{{ item.bookmark_link }}</a>
@@ -26,8 +44,8 @@ export default {
         orderBy: 'bookmark_title'
       },
       bookmark: {
-        bookmark_link: 'https://clutch.ai/?ref=producthunt',
-        bookmark_title: 'WorkBenchAI Machine Learning In Minutes',
+        bookmark_link: '',
+        bookmark_title: '',
         description: '',
         tag: ''
       }

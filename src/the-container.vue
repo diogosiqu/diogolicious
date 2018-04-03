@@ -2,15 +2,17 @@
   <div id="app">
     <!-- <img src="./assets/logo.png"> -->
     <div>
+      <button @click="saveBookmark()">Enviar</button>
       <li v-for="item in list" :key="item.key" class="list-itens">
         {{item.bookmark_title}} <br>
         <a :href="item.bookmark_link">{{ item.bookmark_link }}</a>
-        <p>{{ item.tag }}</p>
-      </li>
+        <p>
+          {{ item.tag }}
+        </p></li>
+      </div>
+      <router-view/>
     </div>
-    <router-view/>
-  </div>
-</template>
+  </template>
 
 <script>
 // import _ from 'lodash' todo verificar documentaçao lodash
@@ -22,6 +24,12 @@ export default {
       configs: {
         // filter: '',
         orderBy: 'bookmark_title'
+      },
+      bookmark: {
+        bookmark_link: 'https://clutch.ai/?ref=producthunt',
+        bookmark_title: 'WorkBenchAI Machine Learning In Minutes',
+        description: '',
+        tag: ''
       }
     }
   },
@@ -30,6 +38,12 @@ export default {
       this.repos = snapshot.val()
     })
   },
+  methods: {
+    saveBookmark () {
+      this.$db.ref().push(this.bookmark)
+    }
+  },
+
   computed: {
     list () {
       // aki é onde a reatividade acontece - estudar reatividade https://www.youtube.com/watch?v=07-TvnH7XNo&list=PLcoYAcR89n-qq1vGRbaUiV6Q9puy0qigW
@@ -40,4 +54,4 @@ export default {
 }
 </script>
 
-<style lang="sass" src="./assets/sass/app.scss"></style>
+  <style lang="sass" src="./assets/sass/app.scss"></style>
